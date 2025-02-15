@@ -25,3 +25,29 @@ Print a message:
 The list of numbers should be print out one per line in lexicographic order with no duplicates.
 """
 
+text_senders_receivers = []
+
+for record in texts:
+    sender, receiver = record[0], record[1]
+    if (sender not in text_senders_receivers):
+        text_senders_receivers.append(sender)
+    if (receiver not in text_senders_receivers):
+        text_senders_receivers.append(receiver)
+
+telemarketers = []
+number_to_avoid = []
+receivers = []
+
+for record in calls:
+    caller, receiver = record[0], record[1]
+    number_to_avoid.append(receiver)
+
+for record in calls:
+    caller, receiver = record[0], record[1]
+    if (caller in text_senders_receivers) or (caller in telemarketers) or (caller in number_to_avoid):
+        continue
+    else:
+        telemarketers.append(caller)
+
+for number in sorted(telemarketers):
+    print(number)
